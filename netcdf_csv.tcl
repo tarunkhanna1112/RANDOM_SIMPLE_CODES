@@ -40,10 +40,10 @@ puts ""
 puts "NUMER OF FRAMES IN THE FILE = $nframes"
 puts ""
 
-set size_per_frame [expr { $nframes / $filesize }]
+set size_per_frame [expr { $filesize / $nframes }]
 set size_per_frame [format "%.2f" $size_per_frame]
 
-puts "FILE PER FRAME IS APPROXIMATELY EQUALS $size_per_frame megabytes"
+puts "FILE SIZE PER FRAME IS APPROXIMATELY EQUALS $size_per_frame megabytes"
 puts ""
 
 # Using mdconvert (from MDTRAJ) to divide the input netcdf file into chunks of less than 5Mb
@@ -142,9 +142,6 @@ if { $div == "y" || $div == "Y" } {
 	set uai $natoms
 }
 
-set start 400
-set end 500
-
 set m 1
 set n 1
 set nf $start
@@ -171,7 +168,6 @@ for {set i $start} {$i < $end} {incr i $frame_per_file} {
 
  incr k 2
 
- puts "   ### READING FRAME $nf ###"
  while { [lindex $data $k] != $end_string } {
   if { $n >= $lai && $n <= $uai } {
 		set x [lindex $data $k]
@@ -185,8 +181,8 @@ for {set i $start} {$i < $end} {incr i $frame_per_file} {
 	}
 
   if { $n == $natoms } {
-	 incr nf
 	 puts "   ### READING FRAME $nf ###"
+	 incr nf
    set n 1
   } else {
    incr n
