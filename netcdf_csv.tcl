@@ -125,6 +125,9 @@ set end_string ";"
 
 # Genarating CSV files with no. of atoms as rows and frames as columns
 
+set start 1
+set end 500
+
 puts "    #### BY DEFAULT THE CODE WILL GENERATE THE CSV FILE FOR THE WHOLE SYSTEM ####"
 puts ""
 puts "		#### DO YOU WANT TO SPECIFY THE RANGE OF ATOMS? (Y/N) ####"
@@ -170,15 +173,15 @@ for {set i $start} {$i < $end} {incr i $frame_per_file} {
 
  while { [lindex $data $k] != $end_string } {
   if { $n >= $lai && $n <= $uai } {
-		set x [lindex $data $k]
-		set x [string range $x 0 [expr { [string length $x] - 2 }]]
-		set y [lindex $data [expr { $k + 1 }]]
-		set y [string range $y 0 [expr { [string length $x] - 2 }]]
-		set z [lindex $data [expr { $k + 2 }]]
-		set z [string range $z 0 [expr { [string length $z] - 2 }]]
+   set x [lindex $data $k]
+   set x [string range $x 0 [expr { [string length $x] - 2 }]]
+   set y [lindex $data [expr { $k + 1 }]]
+   set y [string range $y 0 [expr { [string length $x] - 2 }]]
+   set z [lindex $data [expr { $k + 2 }]]
+   set z [string range $z 0 [expr { [string length $z] - 2 }]]
 
-		lappend l($n) $x $y $z
-	}
+   lappend l($n) $x $y $z
+  }
 
   if { $n == $natoms } {
 	 puts "   ### READING FRAME $nf ###"
@@ -194,6 +197,7 @@ for {set i $start} {$i < $end} {incr i $frame_per_file} {
 
 set all_list ""
 for {set i 1} {$i <= $natoms} {incr i} {
+ puts “   ### CREATING ROW $i ###”
  if { $l($i) != "" } {
  	lappend all_list $l($i)
  }
