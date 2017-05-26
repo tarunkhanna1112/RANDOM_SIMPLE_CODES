@@ -197,7 +197,7 @@ for {set i $start} {$i < $end} {incr i $frame_per_file} {
 
 set all_list ""
 for {set i 1} {$i <= $natoms} {incr i} {
- puts “   ### CREATING ROW $i ###”
+ puts “   ### CREATING LINE $i ###”
  if { $l($i) != "" } {
  	lappend all_list $l($i)
  }
