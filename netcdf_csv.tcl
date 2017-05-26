@@ -46,13 +46,13 @@ set size_per_frame [format "%.2f" $size_per_frame]
 puts "FILE SIZE PER FRAME IS APPROXIMATELY EQUALS $size_per_frame megabytes"
 puts ""
 
-# Using mdconvert (from MDTRAJ) to divide the input netcdf file into chunks of less than 5Mb
+# Using mdconvert (from MDTRAJ) to divide the input netcdf file into chunks of less than 20Mb
 
 set test 0
 
 set k 0
 
-while { $test < 5.0 } { 
+while { $test < 20.0 } { 
  set test [expr { $test + $size_per_frame }]
  incr k
 }
